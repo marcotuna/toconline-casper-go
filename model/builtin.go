@@ -1,0 +1,13 @@
+package model
+
+// NewBool ...
+func NewBool(b bool) *bool { return &b }
+
+// NewInt ...
+func NewInt(n int) *int { return &n }
+
+// NewInt64 ...
+func NewInt64(n int64) *int64 { return &n }
+
+// NewString ...
+func NewString(s string) *string { return &s }
