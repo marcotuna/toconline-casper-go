@@ -12,8 +12,23 @@ type Websocket struct {
 	Payload chan *[]byte
 }
 
+// SetDefaultHeaders ...
+func SetDefaultHeaders() *http.Header {
+	httpHeader := http.Header{}
+	httpHeader.Add("Sec-WebSocket-Protocol", "casper-epaper")
+
+	return &httpHeader
+}
+
 // New instanciates connection with the websocket server
 func New(url string, httpHeader http.Header) (*Websocket, error) {
+
+	// Set default headers when no headers were passed
+	if httpHeader == nil {
+		httpHeader = *SetDefaultHeaders()
+	}
+
+	// Try to establish a websocket connection
 	c, _, err := websocket.DefaultDialer.Dial(url, httpHeader)
 	if err != nil {
 		return nil, err
